@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar</title>
+  <link rel="stylesheet" href="content.css">
+</head>
+<body>
+  <section class="content-page">
+    <h2 id="calendarTitle">Calendar</h2>
+    <div class="calendar-grid" id="calendarGrid" aria-label="今月のカレンダー"></div>
+  </section>
+
+  <script>
+    const title = document.querySelector("#calendarTitle");
+    const grid = document.querySelector("#calendarGrid");
+    const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    function formatDate(year, month, day) {
+      return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    }
+
+    function renderCalendar() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth();
+      const today = now.getDate();
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      title.textContent = now.toLocaleDateString("en-US", {
+        month: "long",
+        year: "numeric"
+      });
+      grid.innerHTML = "";
+
+      weekdays.forEach((weekday) => {
+        const label = document.createElement("strong");
+        label.textContent = weekday;
+        grid.append(label);
+      });
+
+      for (let i = 0; i < firstDay; i += 1) {
+        grid.append(document.createElement("span"));
+      }
+
+      for (let day = 1; day <= daysInMonth; day += 1) {
+        const date = document.createElement("time");
+        date.dateTime = formatDate(year, month, day);
+        date.textContent = day;
+
+        if (day === today) {
+          date.className = "today";
+          date.setAttribute("aria-current", "date");
+        }
+
+        grid.append(date);
+      }
+    }
+
+    function scheduleNextMidnightRender() {
+      const now = new Date();
+      const nextMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+      const delay = nextMidnight.getTime() - now.getTime() + 1000;
+
+      window.setTimeout(() => {
+        renderCalendar();
+        scheduleNextMidnightRender();
+      }, delay);
+    }
+
+    renderCalendar();
+    scheduleNextMidnightRender();
+  </script>
+</body>
+</html>

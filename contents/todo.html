@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToDo</title>
+  <link rel="stylesheet" href="content.css">
+</head>
+<body>
+  <section class="content-page">
+    <h2>Today</h2>
+    <form class="todo-form" id="todoForm">
+      <input id="todoInput" type="text" placeholder="タスクを追加" autocomplete="off">
+      <button type="submit">＋</button>
+    </form>
+    <ul class="todo-list" id="todoList">
+      <li>
+        <label><input type="checkbox"> GitHubリポジトリを作る</label>
+      </li>
+      <li>
+        <label><input type="checkbox"> 欲しいタブを増やす</label>
+      </li>
+      <li>
+        <label><input type="checkbox"> アイコンを差し替える</label>
+      </li>
+    </ul>
+  </section>
+
+  <script>
+    const form = document.querySelector("#todoForm");
+    const input = document.querySelector("#todoInput");
+    const list = document.querySelector("#todoList");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const text = input.value.trim();
+
+      if (!text) {
+        return;
+      }
+
+      const item = document.createElement("li");
+      const label = document.createElement("label");
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      label.append(checkbox, ` ${text}`);
+      item.append(label);
+      list.prepend(item);
+      input.value = "";
+    });
+  </script>
+</body>
+</html>

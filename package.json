@@ -1,0 +1,20 @@
+{
+  "name": "retropop-side-widget",
+  "version": "0.1.0",
+  "description": "A retro-pop Electron sidebar widget for the Windows desktop.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "electron",
+    "sidebar",
+    "widget",
+    "retropop"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^42.3.3"
+  }
+}

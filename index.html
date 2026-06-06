@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RetroPop Side-Widget</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar" id="sidebar" aria-label="RetroPop side widget">
+    <button class="pin-button" id="toggleButton" type="button" aria-label="サイドバーを開く" aria-expanded="false">
+      <span aria-hidden="true">📍</span>
+    </button>
+
+    <nav class="tab-bar" id="tabBar" aria-label="コンテンツタブ"></nav>
+
+    <main class="content-shell">
+      <header class="widget-header">
+        <p class="eyebrow">RetroPop Side-Widget</p>
+        <h1 id="activeTitle">Cheat Sheet</h1>
+      </header>
+      <iframe id="contentFrame" title="Widget content" src="contents/cheat.html"></iframe>
+    </main>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>
